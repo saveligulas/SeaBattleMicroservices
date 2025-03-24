@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: lobby-service
+            uri: http://localhost:9092
+            predicates:
+              - Path=/api/v1/lobby/**
+            metadata:
+              version: v1
+            filters:
+              - StripPrefix=3
+
+          - id: game-service
+            uri: http://localhost:9091
+            predicates:
+              - Path=/api/v1/game/**
+            metadata:
+              version: v1
+            filters:
+              - StripPrefix=3

@@ -11,14 +11,12 @@
 
     <modules>
         <module>gateway</module>
-        <module>test</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
         <spring-boot.version>3.4.3</spring-boot.version>
     </properties>
-    <gamer>Jason ist ein netter Dog</gamer>
 
     <dependencyManagement>
         <dependencies>
@@ -37,9 +35,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.5</version>
         </dependency>
     </dependencies>
 

@@ -2,10 +2,15 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/authorization/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lobby/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../SeaBattleV2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../sg-spring-extras/src/main/java" charset="UTF-8" />
   </component>
 </project>
