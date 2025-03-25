@@ -14,7 +14,18 @@ services:
       - neo4j_logs:/logs
       - neo4j_conf:/var/lib/neo4j/conf
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"] # ensures that data persists
+
 volumes:
   neo4j_data:
   neo4j_logs:
   neo4j_conf:
+  redis_data:
+
