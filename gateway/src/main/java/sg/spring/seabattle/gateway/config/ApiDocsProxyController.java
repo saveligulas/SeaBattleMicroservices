@@ -24,4 +24,11 @@ public class ApiDocsProxyController {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         return response;
     }
+
+    @GetMapping("/proxied-api-docs/auth")
+    public ResponseEntity<String> getAuthorizationApiDocs() {
+        String url = "http://localhost:9093/v3/api-docs";
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        return response;
+    }
 }

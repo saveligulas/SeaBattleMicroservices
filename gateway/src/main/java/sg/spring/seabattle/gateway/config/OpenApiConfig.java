@@ -10,7 +10,7 @@ public class OpenApiConfig {
     public GroupedOpenApi gatewayApi() {
         return GroupedOpenApi.builder()
                 .group("gateway-apis")
-                .pathsToMatch("/api/**")
+                .pathsToMatch("/**")
                 .build();
     }
 }

@@ -12,12 +12,14 @@
         <option value="$PROJECT_DIR$/commons/pom.xml" />
         <option value="$PROJECT_DIR$/lobby/pom.xml" />
         <option value="$PROJECT_DIR$/../sg-spring-extras/pom.xml" />
+        <option value="$PROJECT_DIR$/sg-spring-extras/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/game/pom.xml" />
         <option value="$PROJECT_DIR$/test/pom.xml" />
+        <option value="$PROJECT_DIR$/../SeaBattleV2/pom.xml" />
+        <option value="$PROJECT_DIR$/../sg-spring-extras/pom.xml" />
       </set>
     </option>
   </component>
