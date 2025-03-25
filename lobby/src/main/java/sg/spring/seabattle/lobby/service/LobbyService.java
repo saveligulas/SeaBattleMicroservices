@@ -1,6 +1,9 @@
 package sg.spring.seabattle.lobby.service;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.apache.commons.lang3.concurrent.CircuitBreakingException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 import sg.spring.seabattle.lobby.domain.Lobby;
 import sg.spring.seabattle.lobby.persistence.LobbyRepository;
 
@@ -36,12 +39,13 @@ public class LobbyService {
     }
 
     public String startGame(String lobbyId) {
-        Lobby lobby = lobbyRepository.findById(lobbyId).orElseThrow(() -> new RuntimeException("Lobby not found"));
+
+        Lobby lobby = lobbyRepository.findById(lobbyId)
+                .orElseThrow(() -> new RuntimeException("Lobby not found"));
 
         String gameId = gameService.createGame(lobby.getPlayerOneId(), lobby.getPlayerTwoId());
 
         lobbyRepository.deleteById(lobbyId);
-
         return gameId;
     }
 }

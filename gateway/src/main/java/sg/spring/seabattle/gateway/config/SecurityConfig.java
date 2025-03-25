@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import sg.spring.seabattle.gateway.auth.BasicAuthorizationFilter;
 
 @Configuration
@@ -19,11 +20,14 @@ public class SecurityConfig {
         http.cors(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.authorizeHttpRequests(authorizeRequest -> authorizeRequest
-                .requestMatchers("api/v1/game/**").authenticated()
-                .requestMatchers("api/v1/lobby/**").authenticated()
-                .requestMatchers("api/v1/auth/**").permitAll());
+        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs/swagger-config", "/swagger-ui.html", "/proxied-api-docs/**").permitAll()
+                .requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/api/v1/game/**", "/api/v1/lobby/**").authenticated()
+                .anyRequest().permitAll()
+        );
+
         return http.build();
     }
-
 }
+

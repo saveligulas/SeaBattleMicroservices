@@ -24,7 +24,8 @@ public class BasicAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // quick fix to allow requests to auth without validating
-        if (!request.getRequestURI().contains("api/v1/auth")) {
+        // TODO: change this in the future to not
+        if (!request.getRequestURI().contains("api/v1/auth") && !request.getRequestURI().contains("swagger-ui") && !request.getRequestURI().contains("proxied") && !request.getRequestURI().contains("api-docs")) {
             String userId = request.getHeader("User-ID");
             if (userId == null) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User-ID Header not set");
