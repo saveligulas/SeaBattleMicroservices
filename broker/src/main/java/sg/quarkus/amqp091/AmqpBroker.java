@@ -21,7 +21,6 @@ public class AmqpBroker {
     @Inject
     Vertx vertx;
 
-    @PostConstruct
     public void init() {
         LOG.info("Starting AMQP Broker...");
         vertx.deployVerticle(new AmqpVerticle(), res -> {

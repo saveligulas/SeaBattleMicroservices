@@ -35,7 +35,7 @@ class AmqpVerticle extends AbstractVerticle {
 
             byte[] response;
 
-            if (!Arrays.equals(received.getBytes(), Header.EXPECTED_HEADER_BYTES)) {
+            if (!Arrays.equals(received.getBytes(), Header.PROTOCOL_HEADER)) {
                 response = new byte[] {
                         (byte) 0x00, (byte) 0x01,   // channel_max (1 channel)
                         (byte) 0x00, (byte) 0x00, (byte) 0x01, (byte) 0x00,   // frame_max (256 bytes)
