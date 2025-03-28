@@ -101,15 +101,10 @@ public class AMQPServer {
 
         private void handleTuneOkResponse(byte[] received) {
             logger.debug("Received Tune-Ok frame: {}", bytesToHex(received));
-            if (isConnectionTuneOkFrame(received)) {
-                byte[] connectionOpenFrame = createConnectionOpenFrame();
-                socket.write(Buffer.buffer(connectionOpenFrame));
-                logger.info("Sent Connection.Open frame.");
-                state = ConnectionState.CONNECTED;
-            } else {
-                logger.error("Invalid Connection.Tune-Ok frame, closing connection.");
-                socket.close();
-            }
+            byte[] connectionOpenFrame = createConnectionOpenFrame();
+            socket.write(Buffer.buffer(connectionOpenFrame));
+            logger.info("Sent Connection.Open frame.");
+            state = ConnectionState.CONNECTED;
         }
 
         private boolean isValidProtocolHeader(byte[] received) {
@@ -193,11 +188,11 @@ public class AMQPServer {
             return new byte[]{
                     0x01,
                     0x00, 0x00,
-                    0x00, 0x00, 0x00, 0x0C,
+                    0x00, 0x00, 0x00, 0x08,
                     0x00, 0x0A,
                     0x00, 0x28,
+                    0x01, 'a',
                     0x00,
-                    0x00, 0x00,
                     0x00,
                     (byte) 0xCE
             };
