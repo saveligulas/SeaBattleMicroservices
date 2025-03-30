@@ -2,6 +2,7 @@ package sg.quarkus.amqp091.protocol.frame;
 
 public class Header {
     public static final byte[] PROTOCOL_HEADER = new byte[] { 0x41, 0x4D, 0x51, 0x50, 0x00, 0, 9, 1 };
+    public static final int HEADER_LENGTH = 7;
 
     private final byte[] data = new byte[7];
 
