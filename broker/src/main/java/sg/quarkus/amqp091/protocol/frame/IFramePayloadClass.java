@@ -1,6 +1,7 @@
 package sg.quarkus.amqp091.protocol.frame;
 
-public interface IAMQPPayloadHeader {
+public interface IFramePayloadClass {
+    int CLASS_INDEX = 7;
+
     int getClassId();
-    int getMethodId();
 }
