@@ -1,25 +1,8 @@
 package sg.quarkus.amqp091.protocol.frame;
 
-public class AMQPPayloadHeader implements IAMQPPayloadHeader {
-    private final short classId;
-    private final short methodId;
+public class AMQPPayloadHeaderType {
 
-    public AMQPPayloadHeader(short classId, short methodId) {
-        this.classId = classId;
-        this.methodId = methodId;
-    }
-
-    @Override
-    public int getClassId() {
-        return classId;
-    }
-
-    @Override
-    public int getMethodId() {
-        return methodId;
-    }
-
-    public enum Connection implements IAMQPPayloadHeader {
+    public enum Connection implements IFramePayloadClass, IFramePayloadMethod {
         START(10),
         START_OK(11),
         SECURE(20),
@@ -53,12 +36,12 @@ public class AMQPPayloadHeader implements IAMQPPayloadHeader {
         }
     }
 
-    public enum Flow implements IAMQPPayloadHeader {
+    public enum Flow implements IFramePayloadClass, IFramePayloadMethod {
         FLOW(20),
         FLOW_OK(21),
         CLOSE(40),
         CLOSE_OK(41),
-        OPEN(10), // From channel class
+        OPEN(10),
         OPEN_OK(11); // From channel class
 
         private final short id;
@@ -83,7 +66,7 @@ public class AMQPPayloadHeader implements IAMQPPayloadHeader {
         }
     }
 
-    public enum Exchange implements IAMQPPayloadHeader {
+    public enum Exchange implements IFramePayloadClass, IFramePayloadMethod {
         DECLARE(10),
         DECLARE_OK(11),
         DELETE(20),
@@ -111,7 +94,7 @@ public class AMQPPayloadHeader implements IAMQPPayloadHeader {
         }
     }
 
-    public enum Queue implements IAMQPPayloadHeader {
+    public enum Queue implements IFramePayloadClass, IFramePayloadMethod {
         DECLARE(10),
         DECLARE_OK(11),
         BIND(20),
@@ -145,29 +128,31 @@ public class AMQPPayloadHeader implements IAMQPPayloadHeader {
         }
     }
 
-    public enum Basic implements IAMQPPayloadHeader {
-        QOS(10),
-        QOS_OK(11),
-        CONSUME(20),
-        CONSUME_OK(21),
-        CANCEL(30),
-        CANCEL_OK(31),
-        PUBLISH(40),
-        RETURN(50),
-        DELIVER(60),
-        GET(70),
-        GET_OK(71),
-        GET_EMPTY(72),
-        ACK(80),
-        REJECT(90),
-        RECOVER_ASYNC(100),
-        RECOVER(110),
-        RECOVER_OK(111);
+    public enum Basic implements IFramePayloadClass, IFramePayloadMethod, ICanHaveContent {
+        QOS(10, false),
+        QOS_OK(11, false),
+        CONSUME(20, false),
+        CONSUME_OK(21, false),
+        CANCEL(30, false),
+        CANCEL_OK(31, false),
+        PUBLISH(40, true),
+        RETURN(50, true),
+        DELIVER(60, true),
+        GET(70, false),
+        GET_OK(71, true),
+        GET_EMPTY(72, false), // ALERT - is only self contained if a message is retrieved
+        ACK(80, false),
+        REJECT(90, false),
+        RECOVER_ASYNC(100, false),
+        RECOVER(110, false),
+        RECOVER_OK(111, false);
 
         private final short id;
+        private final boolean hasContent;
 
-        Basic(int id) {
+        Basic(int id, boolean hasContent) {
             this.id = (short) id;
+            this.hasContent = hasContent;
         }
 
         @Override
@@ -184,9 +169,14 @@ public class AMQPPayloadHeader implements IAMQPPayloadHeader {
         public int getClassId() {
             return 60;
         }
+
+        @Override
+        public boolean hasContent() {
+            return hasContent;
+        }
     }
 
-    public enum Tx implements IAMQPPayloadHeader {
+    public enum Tx implements IFramePayloadClass, IFramePayloadMethod {
         SELECT(10),
         SELECT_OK(11),
         COMMIT(20),

@@ -24,9 +24,16 @@ public abstract class AbstractFrame implements IFrame {
         return new byte[0];
     }
 
-    @Override
-    public Header getHeader() {
-        return null;
+    public byte getMethodByte() {
+        return this.data[0];
+    }
+
+    public short getChannelShort() {
+        return (short) ((this.data[1] & 0xff) << 8 | (this.data[2] & 0xff));
+    }
+
+    public int getSizeLong() {
+        return (this.data[3] & 0xff) << 24 | (this.data[4] & 0xff) << 16 | (this.data[5] & 0xff) << 8 | (this.data[6] & 0xff);
     }
 
     protected void checkLength() throws UnprocessableFrameException {
