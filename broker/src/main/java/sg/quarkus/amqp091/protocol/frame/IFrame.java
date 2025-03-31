@@ -9,5 +9,4 @@ public interface IFrame {
         return getTotalPayloadSize() - 1; //subtract the ending byte from the total payload size to get the payload size without the ending byte
     } //returns the payload size without the ending byte
     byte[] getData();
-    Header getHeader();
 }
