@@ -9,7 +9,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sg.quarkus.amqp091.protocol.frame.Frame;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,7 +45,6 @@ public class AMQPServer {
             byte[] received = buffer.getBytes();
             logger.debug("Received (hex): {}", bytesToHex(received));
             logger.debug("Current state: {}", state);
-            logger.debug("Received Frame: {}", new Frame(received));
 
             switch (state) {
                 case INITIAL:
