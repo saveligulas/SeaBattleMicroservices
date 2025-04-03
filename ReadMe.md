@@ -18,12 +18,17 @@ This project implements a sea battle game (similar to Battleship) using a micros
 
 1. **Gateway Service (port 9090)**: Entry point for all requests
 2. **Authorization Service (port 9093)**: Handles user registration and authentication
-3. **Lobby Service (port 9092)**: Manages game lobbies and player matching
+3. **Lobby Service (port 9092)**: Manages game lobbies and player matching (Neo4j Authentication Error can be ignored)
 4. **Game Service (port 9091)**: Implements the core game logic
+5. **AMQP 0-9-1 Server (port 5672)**: Implements a simple AMQP server supporting Channels, Heartbeat and simple Message exchange
 
 ## Messaging
 
-The messaging in this project uses the AMQP protocol. The server for handling
+The messaging in this project uses the AMQP protocol. The server for handling the messaging runs on a custom AMQP implementation contained in this project.
+The broker module provides a quarkus application running an AMQP server on the standard 5672 port. This server only allows simple message pushing as for now.
+That means that no matter which topic, exchange, queue etc. you use, they will always be sent to each consumer. That means that most of the implementation in its
+broker is not yet functional/fully implemented. Only the SingleQueueBroker functions for now. The FrameFactory also needs major overhaul, as most Frames are still generated
+manually if they become too complex.
 
 ## Authentication
 
