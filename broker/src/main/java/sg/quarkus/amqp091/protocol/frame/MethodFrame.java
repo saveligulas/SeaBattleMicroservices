@@ -13,12 +13,12 @@ public class MethodFrame extends AbstractFrame implements IFramePayloadClass, IF
 
     @Override
     public int getClassId() {
-        return NumberUtils.toShort(data[7], data[8]);
+        return NumberUtils.toShort(data[IFramePayloadClass.CLASS_INDEX], data[IFramePayloadClass.CLASS_INDEX + 1]);
     }
 
     @Override
     public int getMethodId() {
-        return NumberUtils.toShort(data[9], data[10]);
+        return NumberUtils.toShort(data[IFramePayloadMethod.METHOD_INDEX], data[IFramePayloadMethod.METHOD_INDEX + 1]);
     }
 
     @Override

@@ -9,8 +9,8 @@ public class DiscoveryFrame extends AbstractFrame {
 
     @Override
     protected void checkLength() throws UnprocessableFrameException {
-        if (data.length != 7) {
-            throw new UnprocessableFrameException("Discovery frame needs to be 7 bytes long");
+        if (data.length != 8) {
+            throw new UnprocessableFrameException("Protocol header must be 8 bytes long");
         }
     }
 

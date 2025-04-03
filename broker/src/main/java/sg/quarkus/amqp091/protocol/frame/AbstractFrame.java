@@ -7,6 +7,8 @@ public abstract class AbstractFrame implements IFrame {
 
     public AbstractFrame(byte[] data) throws UnprocessableFrameException {
         this.data = data;
+        checkLength();
+        checkEndByte();
     }
 
     @Override
