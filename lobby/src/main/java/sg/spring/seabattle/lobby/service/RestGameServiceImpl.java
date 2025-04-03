@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class GameServiceImpl implements GameService {
+public class RestGameServiceImpl implements GameService {
     private final RestTemplate restTemplate;
     private final String gameServiceUrl;
     
     @Autowired
-    public GameServiceImpl(RestTemplate restTemplate,
+    public RestGameServiceImpl(RestTemplate restTemplate,
                            @Value("${game.service.url}") String gameServiceUrl) {
         this.restTemplate = restTemplate;
         this.gameServiceUrl = gameServiceUrl;

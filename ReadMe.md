@@ -21,6 +21,10 @@ This project implements a sea battle game (similar to Battleship) using a micros
 3. **Lobby Service (port 9092)**: Manages game lobbies and player matching
 4. **Game Service (port 9091)**: Implements the core game logic
 
+## Messaging
+
+The messaging in this project uses the AMQP protocol. The server for handling
+
 ## Authentication
 
 The system uses a simple header-based authentication mechanism:

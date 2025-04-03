@@ -18,8 +18,13 @@ import sg.spring.seabattle.game.persistence.repo.TwoPlayerGameNodeRepository;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class TwoPlayerGameService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TwoPlayerGameService.class);
 
     //TODO: abstract this layer so service doesnt have to map this directly
     private final TwoPlayerGameNodeRepository twoPlayerGameNodeRepository;
@@ -179,5 +184,45 @@ public class TwoPlayerGameService {
         
         saveGame(twoPlayerGame);
         return map;
+    }
+    
+    /**
+     * Processes a game creation message from the message queue.
+     * Expected format: gameId;redPlayerId;bluePlayerId
+     *
+     * @param message the message from the queue
+     * @return the UUID of the created game or null if the message couldn't be processed
+     */
+    public UUID processGameCreationMessage(String message) {
+        logger.info("Processing game creation message: {}", message);
+        
+        try {
+            // Parse the message using semicolon delimiter
+            String[] parts = message.split(";");
+            
+            if (parts.length < 3) {
+                logger.error("Invalid message format. Expected gameId;redPlayerId;bluePlayerId, but got: {}", message);
+                return null;
+            }
+            
+            String gameIdStr = parts[0];
+            String redPlayerId = parts[1];
+            String bluePlayerId = parts[2];
+            
+            logger.info("Creating game with ID: {}, Red player: {}, Blue player: {}", 
+                    gameIdStr, redPlayerId, bluePlayerId);
+            
+            // Create the game - for now, we're just using the existing method which generates
+            // a new UUID internally. In a full implementation, we'd want to adapt the domain
+            // model to accept a predefined UUID.
+            UUID createdGameId = createGame(redPlayerId, bluePlayerId, null);
+            
+            logger.info("Game created with ID: {}", createdGameId);
+            return createdGameId;
+            
+        } catch (Exception e) {
+            logger.error("Error processing game creation message: {}", e.getMessage(), e);
+            return null;
+        }
     }
 }
