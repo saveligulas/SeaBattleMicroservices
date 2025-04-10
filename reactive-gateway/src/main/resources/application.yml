@@ -1,0 +1,65 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: reactive-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 5
+    instances:
+      lobbyServiceCircuitBreaker:
+        baseConfig: default
+      gameServiceCircuitBreaker:
+        baseConfig: default
+      authServiceCircuitBreaker:
+        baseConfig: default
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 5s
+    instances:
+      lobbyServiceCircuitBreaker:
+        baseConfig: default
+      gameServiceCircuitBreaker:
+        baseConfig: default
+      authServiceCircuitBreaker:
+        baseConfig: default
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${server.port}
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+    org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: DEBUG
+    reactor.netty: INFO
