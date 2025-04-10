@@ -14,6 +14,7 @@
         <module>authorization</module>
         <module>lobby</module>
         <module>game</module>
+        <module>reactive-gateway</module>
     </modules>
 
     <properties>

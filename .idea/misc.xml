@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/../sg-spring-extras/pom.xml" />
         <option value="$PROJECT_DIR$/sg-spring-extras/pom.xml" />
         <option value="$PROJECT_DIR$/broker/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

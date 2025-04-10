@@ -5,9 +5,11 @@
     <file url="file://$PROJECT_DIR$/broker/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/broker/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eureka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/game/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lobby/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reactive-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sg-spring-extras/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />

@@ -2,6 +2,8 @@
 
 ## Setup
 
+If there are issues with local imports of classes, then reload all maven projects.
+
 Open project in terminal and run: ```docker-compose up```
 
 If everything worked correctly you should have a running neo4j and redis instance running on the standard ports.
@@ -16,7 +18,8 @@ Password: Reader@123
 
 This project implements a sea battle game (similar to Battleship) using a microservices architecture. The system consists of the following components:
 
-1. **Gateway Service (port 9090)**: Entry point for all requests
+1. Legacy - **Gateway Service (port 9090)**: Entry point for all requests
+1. **Reactive Gateway Service (port 9090)**: New version of the gateway that works with Eureka
 2. **Authorization Service (port 9093)**: Handles user registration and authentication
 3. **Lobby Service (port 9092)**: Manages game lobbies and player matching (Neo4j Authentication Error can be ignored)
 4. **Game Service (port 9091)**: Implements the core game logic
